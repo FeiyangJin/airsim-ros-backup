@@ -46,6 +46,7 @@ public:
     {
         //if derived class supports async task then override this method
     }
+
     virtual bool isReady(std::string& message) const
     {
         unused(message);

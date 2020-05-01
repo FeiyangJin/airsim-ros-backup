@@ -328,7 +328,7 @@ public: //fields
 
     std::vector<std::string> warning_messages;
     std::vector<std::string> error_messages;
-    
+
     bool is_record_ui_visible = false;
     int initial_view_mode = 3; //ECameraDirectorMode::CAMERA_DIRECTOR_MODE_FLY_WITH_ME
     bool enable_rpc = true;
@@ -349,7 +349,7 @@ public: //fields
     std::map<std::string, std::unique_ptr<SensorSetting>> sensor_defaults;
 
 public: //methods
-    static AirSimSettings& singleton() 
+    static AirSimSettings& singleton()
     {
         static AirSimSettings instance;
         return instance;

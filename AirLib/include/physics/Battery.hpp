@@ -146,21 +146,6 @@ class PowerEstimator {
             std::begin(third_coeff), 0.0);
 
     return inner_product_one + inner_product_two + inner_product_third;
-
-
-   /*  //old model
-    auto v2 = next.twist.linear.norm();
-       auto v1 = current.twist.linear.norm(),
-    v2 = next.twist.linear.norm();
-    auto diff = v2 - v1;
-    if (diff >= acc_thresh_ * dt) {
-      return accelerate_.eval(v1);
-    } else if (diff <= deacc_thresh_ * dt) {
-      return deaccelerate_.eval(v1);
-    } else {
-      return steady_.eval(v1);
-    }
-    */
   
   }
 

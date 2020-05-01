@@ -103,7 +103,7 @@ int RpcLibClientBase::getMinRequiredClientVersion() const
 }
 int RpcLibClientBase::getServerVersion() const
 {
-	return pimpl_->client.call("getServerVersion").as<int>();
+    return pimpl_->client.call("getServerVersion").as<int>();
 }
 
 void RpcLibClientBase::reset()

@@ -227,11 +227,6 @@ private: //methods
         params_->getSensors().reset();
     }
 
-    /* 
-    TripStats getTripStats(){
-        return trip_stats_;
-    }
-    */
    
     void createDragVertices()
     {
@@ -272,7 +267,6 @@ private: //fields
     EnergyRotorSpecs energy_rotor_specs_;
     std::unique_ptr<Environment> environment_;
     MultirotorApiBase* vehicle_api_;
- //    TripStats trip_stats_;
 };
 
 }} //namespace
