@@ -82,6 +82,7 @@ void ASimModeBase::BeginPlay()
     UAirBlueprintLib::LogMessage(TEXT("Press F1 to see help"), TEXT(""), LogDebugLevel::Informational);
 
     setupVehiclesAndCamera();
+    FRecordingThread::init();
 
     UWorld* World = GetWorld();
     if (World)
@@ -102,8 +103,10 @@ void ASimModeBase::checkVehicleReady()
         if (api) { //sim-only vehicles may have api as null
             std::string message;
             if (!api->isReady(message)) {
-                UAirBlueprintLib::LogMessage("Vehicle %s was not initialized: ", 
-                    "", LogDebugLevel::Failure); //TODO: add vehicle name in message
+                UAirBlueprintLib::LogMessage("Vehicle was not initialized", "", LogDebugLevel::Failure);
+                if (message.size() > 0) {
+                    UAirBlueprintLib::LogMessage(message.c_str(), "", LogDebugLevel::Failure);
+                }
                 UAirBlueprintLib::LogMessage("Tip: check connection info in settings.json", "", LogDebugLevel::Informational);
             }
         }
@@ -126,6 +129,7 @@ void ASimModeBase::setStencilIDs()
 void ASimModeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     FRecordingThread::stopRecording();
+    FRecordingThread::killRecording();
     world_sim_api_.reset();
     api_provider_.reset();
     api_server_.reset();
@@ -160,7 +164,8 @@ void ASimModeBase::initializeTimeOfDay()
         UObjectProperty* sun_prop = Cast<UObjectProperty>(p);
         UObject* sun_obj = sun_prop->GetObjectPropertyValue_InContainer(sky_sphere_);
         sun_ = Cast<ADirectionalLight>(sun_obj);
-        default_sun_rotation_ = sun_->GetActorRotation();
+        if (sun_)
+            default_sun_rotation_ = sun_->GetActorRotation(); 
     }
 }
 
@@ -267,7 +272,7 @@ void ASimModeBase::Tick(float DeltaSeconds)
     drawLidarDebugPoints();
 	
     checkUnrealReset();
-    
+
     Super::Tick(DeltaSeconds);
 }
 
@@ -432,10 +437,12 @@ bool ASimModeBase::isApiServerStarted()
 }
 
 void ASimModeBase::checkUnrealReset() {
+
 	if (api_server_->checkUnrealReset()) {
         api_server_->unSetUnrealReset();	
         UGameplayStatics::OpenLevel(this, FName(*(this->GetWorld()->GetName()), false));
 	}
+
 }
 
 void ASimModeBase::updateDebugReport(msr::airlib::StateReporterWrapper& debug_reporter)

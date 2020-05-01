@@ -48,10 +48,12 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/airsim/project/AirSim-1/cmake
+
+CMAKE_SOURCE_DIR = /home/airsim/project/AirSim/cmake
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/airsim/project/AirSim-1/cmake
+CMAKE_BINARY_DIR = /home/airsim/project/AirSim/cmake
+
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +128,18 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/airsim/project/AirSim-1/cmake && $(CMAKE_COMMAND) -E cmake_progress_start /home/airsim/project/AirSim-1/cmake/CMakeFiles /home/airsim/project/AirSim-1/cmake/HelloCar/CMakeFiles/progress.marks
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/airsim/project/AirSim-1/cmake/CMakeFiles 0
+
+	cd /home/airsim/project/AirSim/cmake && $(CMAKE_COMMAND) -E cmake_progress_start /home/airsim/project/AirSim/cmake/CMakeFiles /home/airsim/project/AirSim/cmake/HelloCar/CMakeFiles/progress.marks
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/airsim/project/AirSim/cmake/CMakeFiles 0
+
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/clean
+
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/clean
+
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +149,30 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/preinstall
+
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/preinstall
+
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/preinstall
+
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/preinstall
+
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/airsim/project/AirSim-1/cmake && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+
+	cd /home/airsim/project/AirSim/cmake && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+
 .PHONY : depend
 
 # Convenience name for target.
 HelloCar/CMakeFiles/HelloCar.dir/rule:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/CMakeFiles/HelloCar.dir/rule
+
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f CMakeFiles/Makefile2 HelloCar/CMakeFiles/HelloCar.dir/rule
+
 .PHONY : HelloCar/CMakeFiles/HelloCar.dir/rule
 
 # Convenience name for target.
@@ -168,35 +182,36 @@ HelloCar: HelloCar/CMakeFiles/HelloCar.dir/rule
 
 # fast build rule for target.
 HelloCar/fast:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/build
+
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/build
 .PHONY : HelloCar/fast
 
-home/airsim/project/AirSim-1/HelloCar/main.o: home/airsim/project/AirSim-1/HelloCar/main.cpp.o
+home/airsim/project/AirSim/HelloCar/main.o: home/airsim/project/AirSim/HelloCar/main.cpp.o
 
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.o
+.PHONY : home/airsim/project/AirSim/HelloCar/main.o
 
 # target to build an object file
-home/airsim/project/AirSim-1/HelloCar/main.cpp.o:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim-1/HelloCar/main.cpp.o
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.cpp.o
+home/airsim/project/AirSim/HelloCar/main.cpp.o:
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim/HelloCar/main.cpp.o
+.PHONY : home/airsim/project/AirSim/HelloCar/main.cpp.o
 
-home/airsim/project/AirSim-1/HelloCar/main.i: home/airsim/project/AirSim-1/HelloCar/main.cpp.i
+home/airsim/project/AirSim/HelloCar/main.i: home/airsim/project/AirSim/HelloCar/main.cpp.i
 
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.i
+.PHONY : home/airsim/project/AirSim/HelloCar/main.i
 
 # target to preprocess a source file
-home/airsim/project/AirSim-1/HelloCar/main.cpp.i:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim-1/HelloCar/main.cpp.i
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.cpp.i
+home/airsim/project/AirSim/HelloCar/main.cpp.i:
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim/HelloCar/main.cpp.i
+.PHONY : home/airsim/project/AirSim/HelloCar/main.cpp.i
 
-home/airsim/project/AirSim-1/HelloCar/main.s: home/airsim/project/AirSim-1/HelloCar/main.cpp.s
+home/airsim/project/AirSim/HelloCar/main.s: home/airsim/project/AirSim/HelloCar/main.cpp.s
 
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.s
+.PHONY : home/airsim/project/AirSim/HelloCar/main.s
 
 # target to generate assembly for a file
-home/airsim/project/AirSim-1/HelloCar/main.cpp.s:
-	cd /home/airsim/project/AirSim-1/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim-1/HelloCar/main.cpp.s
-.PHONY : home/airsim/project/AirSim-1/HelloCar/main.cpp.s
+home/airsim/project/AirSim/HelloCar/main.cpp.s:
+	cd /home/airsim/project/AirSim/cmake && $(MAKE) -f HelloCar/CMakeFiles/HelloCar.dir/build.make HelloCar/CMakeFiles/HelloCar.dir/home/airsim/project/AirSim/HelloCar/main.cpp.s
+.PHONY : home/airsim/project/AirSim/HelloCar/main.cpp.s
 
 # Help Target
 help:
@@ -211,9 +226,11 @@ help:
 	@echo "... list_install_components"
 	@echo "... install/local"
 	@echo "... install"
-	@echo "... home/airsim/project/AirSim-1/HelloCar/main.o"
-	@echo "... home/airsim/project/AirSim-1/HelloCar/main.i"
-	@echo "... home/airsim/project/AirSim-1/HelloCar/main.s"
+
+	@echo "... home/airsim/project/AirSim/HelloCar/main.o"
+	@echo "... home/airsim/project/AirSim/HelloCar/main.i"
+	@echo "... home/airsim/project/AirSim/HelloCar/main.s"
+
 .PHONY : help
 
 
@@ -225,6 +242,8 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/airsim/project/AirSim-1/cmake && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+
+	cd /home/airsim/project/AirSim/cmake && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+
 .PHONY : cmake_check_build_system
 

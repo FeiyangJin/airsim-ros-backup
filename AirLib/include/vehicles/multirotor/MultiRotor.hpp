@@ -14,6 +14,9 @@
 #include "physics/PhysicsBody.hpp"
 #include "common/Settings.hpp"
 
+
+#include "common/Settings.hpp"
+
 #ifndef DEFAULT_VOLTAGE
 #define DEFAULT_VOLTAGE (11.1f)
 #endif  // DEFAULT_VOLTAGE
@@ -21,7 +24,6 @@
 #ifndef DEFAULT_CAPACITY
 #define DEFAULT_CAPACITY (5.5f)
 #endif  // DEFAULT_CAPACITY
- 
 
 namespace msr { namespace airlib {
 
@@ -35,17 +37,47 @@ public:
     }
 
     //*** Start: UpdatableState implementation ***//
-    virtual void reset() override
+    virtual void resetImplementation() override
     {
         //reset rotors, kinematics and environment
-        PhysicsBody::reset();
+        PhysicsBody::resetImplementation();
 
         //reset sensors last after their ground truth has been reset
         resetSensors();
+
         // reset battery
         if (battery_ != nullptr) {
             battery_->reset();
         }
+
+
+        if (battery_ != nullptr) {
+            battery_->reset();
+        }
+    }
+
+    void setEnergyRotorSpecs(Settings& settings){ 
+
+        Settings energy_model_settings;
+
+        settings.getChild("EnergyModelSettings", energy_model_settings);
+
+        energy_rotor_specs_.set_mass(float(energy_model_settings.getFloat("mass", 0)));
+        energy_rotor_specs_.set_mass_coeff(float(energy_model_settings.getFloat("mass_coeff", 0)));
+        energy_rotor_specs_.set_vxy_coeff(float(energy_model_settings.getFloat("vxy_coeff", 0)));
+        energy_rotor_specs_.set_axy_coeff(float(energy_model_settings.getFloat("axy_coeff", 0)));
+        energy_rotor_specs_.set_vxy_axy_coeff(float(energy_model_settings.getFloat("vxy_axy_coeff", 0)));
+        energy_rotor_specs_.set_vz_coeff(float(energy_model_settings.getFloat("vz_coeff", 0)));
+        energy_rotor_specs_.set_az_coeff(float(energy_model_settings.getFloat("az_coeff", 0)));
+        energy_rotor_specs_.set_vz_az_coeff(float(energy_model_settings.getFloat("vz_az_coeff", 0)));
+        energy_rotor_specs_.set_one_coeff(float(energy_model_settings.getFloat("one_coeff", 0)));
+        energy_rotor_specs_.set_vxy_wxy_coeff(float(energy_model_settings.getFloat("vxy_wxy_coeff", 0)));
+
+    }
+
+    EnergyRotorSpecs getEnergyRotorSpecs(){
+        return energy_rotor_specs_;
+
     }
 
     void setEnergyRotorSpecs(Settings& settings){ 
@@ -115,7 +147,7 @@ public:
             rotors_.at(rotor_index).setControlSignal(
                 vehicle_api_->getActuation(rotor_index));
         }
-    
+
         if (battery_ != nullptr) {
             TripStats trip_stats; 
             trip_stats.state_of_charge = battery_->StateOfCharge();
@@ -126,6 +158,7 @@ public:
             trip_stats.distance_traveled = getDistanceTraveled();
             vehicle_api_->setTripStats(trip_stats);
         }
+
     }
 
     //sensor getter
@@ -187,8 +220,7 @@ private: //methods
         float v = float(settings.getFloat("BatteryVoltage", DEFAULT_VOLTAGE));
         float c = float(settings.getFloat("BatteryCapacity", DEFAULT_CAPACITY));
         battery_ = new powerlib::Battery(v, c);
- 
-        
+
         createRotors(*params_, rotors_, environment);
         createDragVertices();
 
@@ -265,6 +297,7 @@ private: //fields
     vector<Rotor> rotors_;
     vector<PhysicsBodyVertex> drag_vertices_;
     EnergyRotorSpecs energy_rotor_specs_;
+
     std::unique_ptr<Environment> environment_;
     MultirotorApiBase* vehicle_api_;
 };

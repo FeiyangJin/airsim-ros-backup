@@ -174,22 +174,11 @@ void MultirotorRpcLibClient::moveByRC(const RCData& rc_data, const std::string& 
     static_cast<rpc::client*>(getClient())->call("moveByRC", MultirotorRpcLibAdapators::RCData(rc_data), vehicle_name);
 }
 
-/*
-IMUStats MultirotorRpcLibClient::getIMUStats()
-{
-    return static_cast<rpc::client*>(getClient())->call("getIMUStats").as<MultirotorRpcLibAdapators::IMUStats>().to();
-}
-*/
 TripStats MultirotorRpcLibClient::getTripStats()
 {
     return static_cast<rpc::client*>(getClient())->call("getTripStats").as<MultirotorRpcLibAdapators::TripStats>().to();
 }
-/*
-GPSStats MultirotorRpcLibClient::getGPSStats()
-{
-	return static_cast<rpc::client*>(getClient())->call("getGPSStats").as<MultirotorRpcLibAdapators::GPSStats>().to();
-}
-*/
+
 
 //return value of last task. It should be true if task completed without
 //cancellation or timeout

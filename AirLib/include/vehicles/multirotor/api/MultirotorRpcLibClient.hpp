@@ -13,11 +13,12 @@
 #include "api/RpcLibClientBase.hpp"
 #include "vehicles/multirotor/api/MultirotorCommon.hpp"
 
+
 namespace msr { namespace airlib {
 
 class MultirotorRpcLibClient : public RpcLibClientBase {
 public:
-    MultirotorRpcLibClient(const string& ip_address = "localhost", uint16_t port = 41451, float timeout_sec = 60);
+    MultirotorRpcLibClient(const string& ip_address = "localhost", uint16_t port = RpcLibPort, float timeout_sec = 60);
 
     MultirotorRpcLibClient* takeoffAsync(float timeout_sec = 20, const std::string& vehicle_name = "");
     MultirotorRpcLibClient* landAsync(float timeout_sec = 60, const std::string& vehicle_name = "");
@@ -48,9 +49,9 @@ public:
 
     MultirotorState getMultirotorState(const std::string& vehicle_name = "");
 
-    CollisionInfo getCollisionInfo();                                                             
+    CollisionInfo getCollisionInfo();
     TripStats getTripStats();
-
+    
     bool setSafety(SafetyEval::SafetyViolationType enable_reasons, float obs_clearance, SafetyEval::ObsAvoidanceStrategy obs_startegy,
         float obs_avoidance_vel, const Vector3r& origin, float xy_length, float max_z, float min_z, const std::string& vehicle_name = "");
 

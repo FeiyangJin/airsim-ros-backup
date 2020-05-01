@@ -46,14 +46,18 @@ add_library(rpclib::rpc STATIC IMPORTED)
 
 set_target_properties(rpclib::rpc PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "RPCLIB_MSGPACK=clmdep_msgpack"
-  INTERFACE_INCLUDE_DIRECTORIES "/home/airsim/project/AirSim-1/external/rpclib/rpclib-2.2.1/include"
+
+  INTERFACE_INCLUDE_DIRECTORIES "/home/airsim/project/AirSim/external/rpclib/rpclib-2.2.1/include"
+
 )
 
 # Import target "rpclib::rpc" for configuration ""
 set_property(TARGET rpclib::rpc APPEND PROPERTY IMPORTED_CONFIGURATIONS NOCONFIG)
 set_target_properties(rpclib::rpc PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_NOCONFIG "CXX"
-  IMPORTED_LOCATION_NOCONFIG "/home/airsim/project/AirSim-1/cmake/output/lib/librpc.a"
+
+  IMPORTED_LOCATION_NOCONFIG "/home/airsim/project/AirSim/cmake/output/lib/librpc.a"
+
   )
 
 # This file does not depend on other imported targets which have

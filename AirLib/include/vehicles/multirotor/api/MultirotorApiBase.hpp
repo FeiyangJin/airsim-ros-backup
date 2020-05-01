@@ -70,6 +70,7 @@ public: //optional overrides
         return trip_stats_; 
     }
     
+
     //below method exist for any firmwares that may want to use ground truth for debugging purposes
     virtual void setSimulatedGroundTruth(const Kinematics::State* kinematics, const Environment* environment)
     {
@@ -77,7 +78,7 @@ public: //optional overrides
         unused(environment);
     }
 
-    virtual void reset() override;
+    virtual void resetImplementation() override;
 
 
 public: //these APIs uses above low level APIs
@@ -120,6 +121,10 @@ public: //these APIs uses above low level APIs
         state.timestamp = clock()->nowNanos();
         state.landed_state = getLandedState();
         state.rc_data = getRCData();
+
+        state.ready = isReady(state.ready_message);
+        state.can_arm = canArm();
+
         state.trip_stats = getTripStats();
         return state;
     }
@@ -327,6 +332,7 @@ private: //variables
     float approx_zero_vel_ = 0.05f;
 
     TripStats trip_stats_; 
+
 };
 
 }} //namespace

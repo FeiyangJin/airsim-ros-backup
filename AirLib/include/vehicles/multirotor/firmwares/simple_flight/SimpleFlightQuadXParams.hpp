@@ -10,6 +10,7 @@
 #include "sensors/SensorFactory.hpp"
 #define MATRICE_100
 
+
 namespace msr { namespace airlib {
 
 class SimpleFlightQuadXParams : public MultiRotorParams {
@@ -50,6 +51,7 @@ protected:
         //set up dimensions of core body box or abdomen (not including arms).
         params.body_box.x() = 0.180f; params.body_box.y() = 0.11f; params.body_box.z() = 0.040f;
         real_T rotor_z = 2.5f / 100;
+
 #elif defined(MATRICE_100)
         //set up arm lengths
         params.rotor_count = 4;
@@ -65,6 +67,36 @@ protected:
         params.rotor_params.max_rpm = 8750; // RPM can be obtained by KV * Voltage (or from docs)
         // using rotor_param default, but if you want to change any of the rotor_params, call calculateMaxThrust() to recompute the max_thrust
         // given new thrust coefficients, motor max_rpm and propeller diameter.
+
+
+        params.rotor_params.propeller_diameter = 0.3302f; //in meters
+        params.rotor_params.calculateMaxThrust();
+        //set up dimensions of core body box or abdomen (not including arms).
+        params.body_box.x() = .252f; params.body_box.y() = .190f; params.body_box.z() = .131f;
+        real_T rotor_z = .0569f;
+#elif defined(_3DR_SOLO)
+        /* TODO: make a new rotor_params and update it with the correct coefficents, rpm, and prop diameter */
+        params.rotor_count = 4;
+        real_T motor_arm_length = .130175f;
+        std::vector<real_T> arm_lengths(params.rotor_count, motor_arm_length);
+
+        //set up mass
+        params.mass = 1.5f;
+        real_T motor_assembly_weight = 0.0680389f;
+        real_T box_mass = params.mass - params.rotor_count * motor_assembly_weight;
+
+        params.rotor_params.C_P = 0.040164f; // the torque co-efficient
+        params.rotor_params.C_T = 0.109919f; // the thrust co-efficient
+        params.rotor_params.max_rpm = 13024 * .6; //RPM can be obtained by KV * Voltage
+
+        params.rotor_params.propeller_diameter = 0.254f; //in meters
+        params.rotor_params.calculateMaxThrust();
+
+        //set up dimensions of core body box or abdomen (not including arms).
+        params.body_box.x() = .2428875f; params.body_box.y() = .10795; params.body_box.z() = .066675;
+        real_T rotor_z = 0.9525f / 100;
+#endif
+
 
         params.rotor_params.propeller_diameter = 0.3302f; //in meters
         params.rotor_params.calculateMaxThrust();

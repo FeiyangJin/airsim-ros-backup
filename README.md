@@ -15,7 +15,9 @@ Cars in AirSim
 [![AirSim Car Demo Video](docs/images/car_demo_video.png)](https://youtu.be/gnz1X3UNM5Y)
 
 ## What's New
-
+* A ROS wrapper for multirotors is available. See [airsim_ros_pkgs](https://github.com/microsoft/AirSim/blob/master/ros/src/airsim_ros_pkgs) for the ROS API, and [airsim_tutorial_pkgs](https://github.com/microsoft/AirSim/blob/master/ros/src/airsim_tutorial_pkgs) for tutorials. 
+* [Added sensor APIs for Barometer, IMU, GPS, Magnetometer, Distance Sensor](https://microsoft.github.io/AirSim/docs/sensors) 
+* Added support for [docker in ubuntu](https://github.com/microsoft/AirSim/blob/master/docs/docker_ubuntu.md) 
 * Added Weather Effects and [APIs](https://microsoft.github.io/AirSim/docs/apis#weather-apis)
 * Added [Time of Day API](https://microsoft.github.io/AirSim/docs/apis#time-of-day-api)
 * An experimental integration of [AirSim on Unity](https://github.com/Microsoft/AirSim/tree/master/Unity) is now available. Learn more in [Unity blog post](https://blogs.unity3d.com/2018/11/14/airsim-on-unity-experiment-with-autonomous-vehicle-simulation).
@@ -78,7 +80,7 @@ A better way to generate training data exactly the way you want is by accessing 
 
 Yet another way to use AirSim is the so-called "Computer Vision" mode. In this mode, you don't have vehicles or physics. You can use the keyboard to move around the scene, or use APIs to position available cameras in any arbitrary pose, and collect images such as depth, disparity, surface normals or object segmentation. 
 
-[More details](https://microsoft.github.io/AirSim/docs/docs/image_apis/)
+[More details](https://microsoft.github.io/AirSim/docs/image_apis/)
 
 ### Weather Effects
 

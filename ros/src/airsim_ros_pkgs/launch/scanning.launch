@@ -1,0 +1,20 @@
+<launch>
+	<include file="$(find airsim_tutorial_pkgs)/launch/front_stereo_and_center_mono/front_stereo_and_center_mono.launch"/>
+
+ 	<node pkg="airsim_ros_pkgs" name="scanning_node" type="scanning_node" output="screen" />
+
+	<node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+		<param name="resolution" value="0.6" />
+	
+		<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+		<param name="frame_id" type="string" value="world_enu" />
+		
+		<!-- maximum range to integrate (speedup!) -->
+		<param name="sensor_model/max_range" value="50" />
+		
+		<!-- data source to integrate (PointCloud2) -->
+		<remap from="cloud_in" to="/airsim_node/drone_1/front_left_custom/DepthPlanner/registered/points" />
+
+	</node>
+
+</launch>

@@ -77,6 +77,8 @@ public:
     }
 	void checkUnrealReset();
 
+    void checkUnrealReset();
+
 protected: //must overrides
     typedef msr::airlib::AirSimSettings AirSimSettings;
 

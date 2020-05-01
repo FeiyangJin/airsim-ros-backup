@@ -39,6 +39,7 @@ public:
         }
     };
 
+
     struct TripStats {
     
         float state_of_charge = -1.0f;
@@ -78,7 +79,6 @@ public:
                     collision_count);
        }
     };
-    
 
 
     struct MultirotorState {
@@ -89,7 +89,12 @@ public:
         uint64_t timestamp;
         LandedState landed_state;
         RCData rc_data;
+        bool ready;
+        std::string ready_message;
         std::vector<std::string> controller_messages;
+
+        bool can_arm;
+
         TripStats trip_stats;
 
         MSGPACK_DEFINE_MAP(collision, kinematics_estimated, gps_location, timestamp, landed_state, rc_data, trip_stats);
@@ -105,13 +110,20 @@ public:
             timestamp = s.timestamp;
             landed_state = s.landed_state;
             rc_data = RCData(s.rc_data);
-            trip_stats = s.trip_stats; 
+
+            ready = s.ready;
+            ready_message = s.ready_message;
+            can_arm = s.can_arm;
+            trip_stats = s.trip_stats;
+
         }
 
         msr::airlib::MultirotorState to() const
         {
             return msr::airlib::MultirotorState(collision.to(), kinematics_estimated.to(), 
-                gps_location.to(), timestamp, landed_state, rc_data.to(), trip_stats.to());
+
+            gps_location.to(), timestamp, landed_state, rc_data.to(), ready, ready_message, can_arm, trip_stats.to());
+
         }
     };
 

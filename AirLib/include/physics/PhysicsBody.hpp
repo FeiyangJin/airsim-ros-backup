@@ -32,6 +32,7 @@ public: //interface
     virtual EnergyRotorSpecs getEnergyRotorSpecs(){
         EnergyRotorSpecs energy_rotor_specs;     
         return  energy_rotor_specs;
+
     } 
     
     virtual PhysicsBodyVertex& getWrenchVertex(uint index)
@@ -67,6 +68,7 @@ public: //interface
     virtual void updateTime(TTimeDelta dt) {
         total_time_since_creation_ += dt;
     }
+
     virtual void updateDistanceTraveled(Pose cur_pose) {
         if (distance_traveled_ == -1) { //first value
             distance_traveled_ = 0;
@@ -118,7 +120,7 @@ public: //methods
     }
 
     bool hasBattery() const { return battery_ != nullptr; }
- 
+
     //enable physics body detection
     virtual UpdatableObject* getPhysicsBody() override
     {
@@ -127,10 +129,8 @@ public: //methods
 
 
     //*** Start: UpdatableState implementation ***//
-    virtual void reset() override
+    virtual void resetImplementation() override
     {
-        UpdatableObject::reset();
-
         if (environment_)
             environment_->reset();
         wrench_ = Wrench::zero();
@@ -263,6 +263,64 @@ public: //methods
         return (float) total_time_since_creation_;
     }
 
+    powerlib::Battery *getBattery() { return battery_; }
+
+    float getStateOfCharge() const
+    {
+        if (battery_ != nullptr) {
+            return battery_->StateOfCharge();
+        } else {
+            return -100.0;
+        }
+    }
+
+    float getVotage() const
+    {
+        if (battery_ != nullptr) {
+            return battery_->Voltage();
+        } else {
+            return 0.0;
+        }
+    }
+
+    float getNominalVoltage() const
+    {
+        if (battery_ != nullptr) {
+            return battery_->NominalVoltage();
+        } else {
+            return 0.0;
+        }
+    }
+
+    float getCapacity() const
+    {
+        if (battery_ != nullptr) {
+            return battery_->Capacity();
+        } else {
+            return 0.0;
+        }
+    }
+
+    float getDistanceTraveled() const
+    {
+        return distance_traveled_;
+    }
+
+
+    float getEnergyConsumed() const
+    {
+        return energy_consumed_;
+    }
+
+    int getCollisionCount() const                                                                       {                                                                                               return collision_response_.collision_count_non_resting;
+    }
+
+    float getTotalTime() const
+    {
+        return (float) total_time_since_creation_;
+    }
+
+
     const Kinematics::State& getKinematics() const
     {
         return kinematics_->getState();
@@ -328,6 +386,12 @@ private:
     float distance_traveled_quanta_ = .1f; //the smallest amount that ould be accumulated to the distance traveled. This is set to cancel the accumulated error
     float energy_consumed_ = 0;
 
+
+    TTimeDelta total_time_since_creation_ = 0;
+    Pose last_pose_; 
+    float distance_traveled_ = -1.0f;
+    float distance_traveled_quanta_ = .1f; //the smallest amount that ould be accumulated to the distance traveled. This is set to cancel the accumulated error
+    float energy_consumed_ = 0;
 
     Kinematics* kinematics_ = nullptr;
     Environment* environment_ = nullptr;

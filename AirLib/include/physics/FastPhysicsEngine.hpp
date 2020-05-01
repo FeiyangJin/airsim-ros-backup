@@ -25,10 +25,8 @@ public:
     }
 
     //*** Start: UpdatableState implementation ***//
-    virtual void reset() override
+    virtual void resetImplementation() override
     {
-        PhysicsEngineBase::reset();
-
         for (PhysicsBody* body_ptr : *this) {
             initPhysicsBody(body_ptr);
         }
@@ -103,7 +101,7 @@ private:
             body.updateEnergyConsumed((float)P * float(dt));
             body.updateTime(dt);
         }
-        
+
         body.setWrench(next_wrench);
         body.updateKinematics(next);
 
@@ -460,7 +458,6 @@ private:
     bool enable_ground_lock_;
     TTimePoint last_message_time;
     powerlib::PowerEstimator p_estimator_;
-
 };
 
 }} //namespace

@@ -32,13 +32,10 @@ public:
     }
 
     //*** Start: UpdatableState implementation ***//
-    virtual void reset() override
+    virtual void resetImplementation() override
     {
-        DistanceBase::reset();
-
         //correlated_noise_.reset();
         uncorrelated_noise_.reset();
-
 
         freq_limiter_.reset();
         delay_line_.reset();
@@ -88,6 +85,7 @@ private: //methods
         output.min_distance = params_.min_distance;
         output.max_distance = params_.max_distance;
         output.relative_pose = params_.relative_pose;
+        output.time_stamp = clock()->nowNanos();
 
         return output;
     }

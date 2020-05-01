@@ -1,0 +1,32 @@
+<launch>
+		<!-- Drone's physical characteristics /-->
+		<arg name="a_max" default="5"/> 
+		<arg name="v_max" default="2.5"/> 
+		<arg name="future_col_drone_radius" default="1.5"/>
+		<arg name="future_col_drone_height" default="0.6"/>
+		<arg name="planner_drone_radius" default="2"/>
+		<arg name="planner_drone_height" default="0.6"/>
+
+		<arg name="planning_budget" default="5"/>
+		<param name="planning_budget" value="$(arg planning_budget)"/>
+
+	<node pkg="airsim_ros_pkgs" name="package_delivery_node" type="package_delivery_node" output="screen" />
+
+	
+	<node pkg="airsim_ros_pkgs" name="motion_planner" type="motion_planner">
+		<param name="motion_planning_core" value="OMPL_RRTstar"/>
+		<param name="sampling_interval" value="0.5"/>
+        <param name="planner_drone_radius" value="$(arg planner_drone_radius)"/>
+        <param name="planner_drone_height" value="$(arg planner_drone_height)"/>
+        <param name="v_max" value="$(arg v_max)"/>
+		<param name="a_max" value="$(arg a_max)"/>
+	</node>
+	
+	<node pkg="airsim_ros_pkgs" name="future_collision" type="future_collision">
+        <param name="drone_radius" value="$(arg future_col_drone_radius)"/>
+        <param name="drone_height" value="$(arg future_col_drone_height)"/>
+	</node>
+
+	<node pkg="airsim_ros_pkgs" name="panic_pcl" type="panic_pcl"/>
+
+</launch>

@@ -113,7 +113,9 @@ void MultirotorPawnSimApi::updateRendering(float dt)
 
     //UAirBlueprintLib::LogMessage(TEXT("Collision (raw) Count:"), FString::FromInt(collision_response.collision_count_raw), LogDebugLevel::Unimportant);
     UAirBlueprintLib::LogMessage(TEXT("Collision Count:"), 
-            FString::FromInt(collision_response.collision_count_non_resting), LogDebugLevel::Informational);
+
+    FString::FromInt(collision_response.collision_count_non_resting), LogDebugLevel::Informational);
+
     UAirBlueprintLib::LogMessage(TEXT("Voltage:"), FString::SanitizeFloat(phys_vehicle_->getVotage()), LogDebugLevel::Failure);
     UAirBlueprintLib::LogMessage(TEXT("StateOfCharge:"), FString::SanitizeFloat(phys_vehicle_->getStateOfCharge()), LogDebugLevel::Failure);
     UAirBlueprintLib::LogMessage(TEXT("EnergyConsumed:"), FString::SanitizeFloat(phys_vehicle_->getEnergyConsumed()), LogDebugLevel::Failure);
@@ -142,9 +144,9 @@ void MultirotorPawnSimApi::setPose(const Pose& pose, bool ignore_collision)
 }
 
 //*** Start: UpdatableState implementation ***//
-void MultirotorPawnSimApi::reset()
+void MultirotorPawnSimApi::resetImplementation()
 {
-    PawnSimApi::reset();
+    PawnSimApi::resetImplementation();
 
     vehicle_api_->reset();
     phys_vehicle_->reset();
